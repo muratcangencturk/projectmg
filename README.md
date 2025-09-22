@@ -6,6 +6,14 @@ Uygulama; ürün yöneticileri, yazılım geliştiricileri, tasarımcılar, mü�
 
 projectmg, dağınık araç kullanımından kaynaklanan görünürlük eksikliğini ve manuel takip süreçlerinin yarattığı hataları ortadan kaldırmayı hedefler. Tek bir veri kaynağı üzerinden görevleri, kilometre taşlarını ve riskleri takip ederek ekiplerin proaktif davranmasına ve teslim tarihlerini güvenle yönetmesine yardımcı olur.
 
+## Özellikler
+
+- **Proje listesi (`data-component="project-list"`)**: Yol haritasındaki projeleri statü rozetleri, teslim tarihi ve gerçek zamanlı tamamlanma yüzdeleri ile gösterir. Bir projeyi seçtiğinizde ilgili görevler otomatik olarak filtrelenir.
+- **Görev merkezi (`data-component="task-hub"`)**: Durum, öncelik ve serbest metin arama filtreleriyle görevleri daraltmanızı sağlar. Her görev kartından durum güncellemesi yapılabilir ve seçimler kalıcı olarak saklanır.
+- **Detay panosu (`data-component="detail-panel"`)**: Seçili görevin açıklamasını, teslim bilgisini, önceliğini ve kontrol listesini özetler. Görev üzerindeki değişiklikler takım aktivite akışına ve bildirimlere yansır.
+- **Takım aktivitesi (`data-component="team-activity"`)**: Son ekip güncellemelerini zaman damgalarıyla listeler ve görev durumlarının otomatik olarak oluşturduğu kayıtları da içerir.
+- **Çağrı &amp; aksiyon (`data-component="call-to-action"`)**: Kalan görev metriklerini, aksiyon öğelerini ve simüle edilen bildirimleri tek panelde sunar. Bildirimler ve tema tercihleri tarayıcı `localStorage` alanında saklanır.
+
 ## Sistem Gereksinimleri
 
 - Python 3.10 veya üzeri

@@ -1,1 +1,182 @@
-.
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="ProjectMG - ekipler için modern ve modüler proje yönetimi gösterge paneli"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/styles/main.css" />
+    <title>ProjectMG Gösterge Paneli</title>
+    <script type="module" src="assets/js/app.js" defer></script>
+  </head>
+  <body data-theme="light">
+    <a class="skip-link" href="#mainContent">İçeriğe atla</a>
+    <header class="app-header" role="banner">
+      <div class="brand" aria-label="ProjectMG ana başlık">
+        <span class="brand__mark" aria-hidden="true">◆</span>
+        <div class="brand__text">
+          <p class="brand__title">ProjectMG</p>
+          <p class="brand__subtitle">Takımınızı hizalayın, ilerlemeyi görün.</p>
+        </div>
+      </div>
+      <div class="header-tools">
+        <div class="header-tools__welcome">
+          <p class="welcome__title">Merhaba, ekip!</p>
+          <p class="welcome__subtitle">Bugünün odağı: akışkan teslimatlar.</p>
+        </div>
+        <div class="header-tools__actions" role="group" aria-label="Eylemler">
+          <button
+            type="button"
+            id="themeToggle"
+            class="button button--ghost"
+            aria-live="polite"
+            aria-pressed="false"
+          >
+            <span class="button__icon" aria-hidden="true">🌗</span>
+            <span class="button__label">Temayı değiştir</span>
+          </button>
+          <button type="button" id="simulateNotification" class="button button--primary">
+            <span class="button__icon" aria-hidden="true">🔔</span>
+            <span class="button__label">Bildirim Gönder</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="mainContent" class="app-layout" aria-live="polite">
+      <section data-component="project-list" class="panel">
+        <header class="panel__header">
+          <div>
+            <h2>Projeler</h2>
+            <p>Yol haritasındaki projeleri inceleyin ve bir odak seçin.</p>
+          </div>
+          <div class="panel__header-actions">
+            <button type="button" id="resetState" class="button button--ghost">
+              Varsayılanı Yükle
+            </button>
+          </div>
+        </header>
+        <ul id="projectList" class="project-list" role="list"></ul>
+      </section>
+
+      <section data-component="task-hub" class="panel">
+        <header class="panel__header">
+          <div>
+            <h2>Görevler</h2>
+            <p>Filtreleyin, durum güncelleyin ve görevleri önceliklendirin.</p>
+          </div>
+        </header>
+        <form class="task-controls" aria-label="Görev filtreleri">
+          <div class="form-field">
+            <label for="taskSearch">Ara</label>
+            <input
+              type="search"
+              id="taskSearch"
+              name="taskSearch"
+              placeholder="Başlık, etiket veya kişi..."
+            />
+          </div>
+          <div class="form-field">
+            <label for="taskStatusFilter">Durum</label>
+            <select id="taskStatusFilter" name="taskStatusFilter">
+              <option value="all">Tümü</option>
+              <option value="todo">Yapılacak</option>
+              <option value="in-progress">Devam ediyor</option>
+              <option value="review">İncelemede</option>
+              <option value="done">Tamamlandı</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="taskPriorityFilter">Öncelik</label>
+            <select id="taskPriorityFilter" name="taskPriorityFilter">
+              <option value="all">Tümü</option>
+              <option value="low">Düşük</option>
+              <option value="medium">Orta</option>
+              <option value="high">Yüksek</option>
+            </select>
+          </div>
+        </form>
+        <div id="taskEmptyState" class="empty-state" hidden>
+          <p>Filtre kriterlerine uyan görev bulunamadı.</p>
+          <p class="empty-state__hint">Filtreleri sıfırlayarak tüm görevleri görüntüleyin.</p>
+        </div>
+        <ul id="taskList" class="task-list" role="list"></ul>
+      </section>
+
+      <section data-component="detail-panel" class="panel">
+        <header class="panel__header">
+          <div>
+            <h2>Detay Panosu</h2>
+            <p>Seçili görevin bağlamını ve aksiyonlarını inceleyin.</p>
+          </div>
+        </header>
+        <article id="taskDetail" class="detail-panel" aria-live="polite">
+          <div class="detail-panel__empty">
+            <h3>Bir görev seçin</h3>
+            <p>Sol taraftaki listeden bir görev seçtiğinizde detaylar burada görünür.</p>
+          </div>
+        </article>
+      </section>
+
+      <section data-component="team-activity" class="panel">
+        <header class="panel__header">
+          <div>
+            <h2>Takım Aktivitesi</h2>
+            <p>Gerçek zamanlı iş birliği için son güncellemeler.</p>
+          </div>
+        </header>
+        <ol id="activityTimeline" class="activity-timeline"></ol>
+      </section>
+
+      <section data-component="call-to-action" class="panel">
+        <header class="panel__header">
+          <div>
+            <h2>Çağrı &amp; Aksiyon</h2>
+            <p>Öncelikli öğeleri tamamlayın, bildirimleri yönetin.</p>
+          </div>
+        </header>
+        <div class="cta">
+          <div class="cta__metrics" aria-live="polite">
+            <div class="metric-card">
+              <p class="metric-card__label">Aktif Görev</p>
+              <p class="metric-card__value" id="metricActiveTasks">0</p>
+            </div>
+            <div class="metric-card">
+              <p class="metric-card__label">Bekleyen İnceleme</p>
+              <p class="metric-card__value" id="metricPendingReview">0</p>
+            </div>
+            <div class="metric-card">
+              <p class="metric-card__label">Geciken</p>
+              <p class="metric-card__value" id="metricOverdue">0</p>
+            </div>
+          </div>
+          <div class="cta__actions">
+            <h3>Aksiyon Öğeleri</h3>
+            <ul id="actionList" class="action-list" role="list"></ul>
+          </div>
+          <div class="cta__notifications">
+            <div class="cta__notifications-header">
+              <h3>Bildirimler</h3>
+              <button type="button" id="clearNotifications" class="button button--ghost">
+                Temizle
+              </button>
+            </div>
+            <ul id="notificationList" class="notification-list" role="list"></ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>&copy; <span id="currentYear"></span> ProjectMG. Tüm hakları saklıdır.</p>
+    </footer>
+  </body>
+</html>
